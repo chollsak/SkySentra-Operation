@@ -1,0 +1,9 @@
+[submodule "tg-interface"]
+	path = tg-interface
+	url = https://github.com/tg-ttc-2025/tg-interface.git
+[submodule "tg-backend"]
+	path = tg-backend
+	url = https://github.com/tg-ttc-2025/tg-backend.git
+[submodule "tg-system"]
+	path = tg-system
+	url = https://github.com/tg-ttc-2025/tg-system.git
