@@ -2,7 +2,6 @@ const mqtt = require('mqtt');
 const axios = require('axios');
 require('dotenv').config();
 
-// Configuration
 const MQTT_BROKER = process.env.MQTT_BROKER || 'broker.hivemq.com';
 const MQTT_TOPIC = process.env.MQTT_TOPIC || 'TGR2568/66';
 const MQTT_USERNAME = process.env.MQTT_USERNAME || '';
@@ -10,27 +9,23 @@ const MQTT_PASSWORD = process.env.MQTT_PASSWORD || '';
 const API_URL = process.env.API_URL || 'http://localhost:3000/ttc/api/offense-move';
 const API_TIMEOUT = parseInt(process.env.API_TIMEOUT || '1000000000000');
 
-// Statistics
 let stats = {
   received: 0,
   sent: 0,
   failed: 0
 };
 
-// MQTT Client options
 const mqttOptions = {
   clientId: `mqtt_bridge_${Math.random().toString(16).slice(3)}`,
   clean: true,
   reconnectPeriod: 1000,
 };
 
-// Add authentication if provided
 if (MQTT_USERNAME && MQTT_PASSWORD) {
   mqttOptions.username = MQTT_USERNAME;
   mqttOptions.password = MQTT_PASSWORD;
 }
 
-// Display startup info
 console.log('=' .repeat(60));
 console.log('🌉 MQTT to HTTP Bridge');
 console.log('=' .repeat(60));
@@ -39,11 +34,9 @@ console.log(`MQTT Topic: ${MQTT_TOPIC}`);
 console.log(`API Endpoint: ${API_URL}`);
 console.log('=' .repeat(60));
 
-// Connect to MQTT broker
 console.log('🔄 Connecting to MQTT broker...');
 const client = mqtt.connect(MQTT_BROKER, mqttOptions);
 
-// Connection event
 client.on('connect', () => {
   console.log('✅ Connected to MQTT broker');
   console.log(`📡 Subscribing to topic: ${MQTT_TOPIC}`);
